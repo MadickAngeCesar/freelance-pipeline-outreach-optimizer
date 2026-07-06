@@ -166,7 +166,7 @@ export default function Dashboard({ leads, onNavigate }: DashboardProps) {
       </div>
 
       {/* 2. Key metrics bento grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-sm flex items-center justify-between">
           <div className="space-y-1">
             <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Active Deals</p>
@@ -216,7 +216,7 @@ export default function Dashboard({ leads, onNavigate }: DashboardProps) {
       </div>
 
       {/* 3. Main Funnel Visualization and Health Advisor */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Funnel chart (8 cols) */}
         <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-sm lg:col-span-8 flex flex-col justify-between">
@@ -225,23 +225,23 @@ export default function Dashboard({ leads, onNavigate }: DashboardProps) {
             <p className="text-xs text-slate-400 mt-0.5">Drop-off rate and value density per pipeline milestone.</p>
           </div>
 
-          <div className="my-8 space-y-4">
+          <div className="my-10 space-y-6">
             {funnelStages.map((stage, idx) => {
               // Calculate percent of leads relative to the top (first stage)
               const maxLeads = funnelStages[0].count || 1;
               const percentLeads = Math.round((stage.count / maxLeads) * 100);
 
               return (
-                <div key={stage.key} className="flex items-center gap-4">
-                  <div className="w-24 sm:w-36 text-right shrink-0">
-                    <p className="text-xs font-semibold text-slate-300 truncate">{stage.label}</p>
-                    <p className="text-[10px] text-indigo-400 font-mono font-medium">${stage.value.toLocaleString()}</p>
+                <div key={stage.key} className="flex items-center gap-6">
+                  <div className="w-24 sm:w-40 text-right shrink-0">
+                    <p className="text-xs font-bold text-slate-200 truncate">{stage.label}</p>
+                    <p className="text-[10px] text-indigo-400 font-mono font-bold">${stage.value.toLocaleString()}</p>
                   </div>
                   
-                  <div className="grow bg-slate-950 h-10 rounded-lg flex items-center relative overflow-hidden border border-slate-850">
+                  <div className="grow bg-slate-950 h-12 rounded-xl flex items-center relative overflow-hidden border border-slate-800 shadow-inner">
                     {/* Filled bar with transition */}
                     <div 
-                      className={`h-full ${stage.color} opacity-85 transition-all duration-500 rounded-r-md flex items-center justify-between px-3`}
+                      className={`h-full ${stage.color} opacity-90 transition-all duration-700 rounded-r-lg flex items-center justify-between px-4 shadow-lg`}
                       style={{ width: `${Math.max(percentLeads, stage.count > 0 ? 8 : 0)}%` }}
                     >
                       {stage.count > 0 && (
