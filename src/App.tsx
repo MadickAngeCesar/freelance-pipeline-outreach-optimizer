@@ -156,7 +156,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col font-sans text-slate-100 antialiased selection:bg-pink-500 selection:text-white">
+    <div className="h-screen bg-slate-950 flex flex-col font-sans text-slate-100 antialiased selection:bg-pink-500 selection:text-white overflow-hidden">
       
       {/* 1. TOP HEADER BRANDING */}
       <header className="sticky top-0 z-40 bg-slate-900/80 border-b border-slate-850 backdrop-blur-md px-6 py-4 flex items-center justify-between">
@@ -215,7 +215,7 @@ export default function App() {
       )}
 
       {/* 3. APP NAVIGATION BAR & CONTAINER */}
-      <div className="grow flex flex-col lg:flex-row relative">
+      <div className="grow flex flex-col lg:flex-row relative overflow-hidden">
         
         {/* Navigation Sidebar (Desktop + Mobile Drawer) */}
         <aside className={`
@@ -360,7 +360,7 @@ export default function App() {
         )}
 
         {/* 4. MAIN VIEWS SWITCHER */}
-        <main className="grow p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-opacity duration-300 overflow-x-hidden">
+        <main className="grow p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-opacity duration-300 overflow-y-auto custom-scrollbar">
           
           {activeTab === 'dashboard' && (
             <Dashboard 
@@ -404,20 +404,19 @@ export default function App() {
             <AcquisitionCalculator />
           )}
 
+          {/* 5. APP FOOTER (Inside main to scroll with content) */}
+          <footer className="mt-auto pt-12 pb-6 text-center text-xs text-slate-500 border-t border-slate-850/50">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p>© 2026 Acquire Freelance Pipeline OS. Optimized with React + Vite + server-side Gemini AI.</p>
+              <div className="flex gap-4">
+                <a href="#leads" onClick={() => { setActiveTab('leads'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">CRM Pipeline</a>
+                <a href="#sequences" onClick={() => { setActiveTab('sequences'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">Outbound Sequences</a>
+                <a href="#optimizer" onClick={() => { setActiveTab('optimizer'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">AI Copywriting Coach</a>
+              </div>
+            </div>
+          </footer>
         </main>
       </div>
-
-      {/* 5. APP FOOTER */}
-      <footer className="bg-slate-900 border-t border-slate-850 py-6 px-8 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 Acquire Freelance Pipeline OS. Optimized with React + Vite + server-side Gemini AI.</p>
-          <div className="flex gap-4">
-            <a href="#leads" onClick={() => { setActiveTab('leads'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">CRM Pipeline</a>
-            <a href="#sequences" onClick={() => { setActiveTab('sequences'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">Outbound Sequences</a>
-            <a href="#optimizer" onClick={() => { setActiveTab('optimizer'); setIsMobileMenuOpen(false); }} className="hover:text-pink-400 transition">AI Copywriting Coach</a>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );
