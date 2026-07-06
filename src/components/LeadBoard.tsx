@@ -188,7 +188,7 @@ export default function LeadBoard({ leads, onAddLead, onUpdateLead, onDeleteLead
       </div>
 
       {/* Kanban Board Columns */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 overflow-x-auto pb-4 custom-scrollbar">
+      <div className="flex flex-col md:grid md:grid-cols-3 lg:flex lg:flex-row gap-6 overflow-x-auto pb-6 custom-scrollbar -mx-4 px-4 lg:-mx-8 lg:px-8">
         {STAGES.map(stage => {
           const stageLeads = filteredLeads.filter(l => l.currentStage === stage.key);
           const stageValueTotal = stageLeads.reduce((acc, curr) => acc + curr.estimatedValue, 0);
@@ -196,7 +196,7 @@ export default function LeadBoard({ leads, onAddLead, onUpdateLead, onDeleteLead
           return (
             <div 
               key={stage.key} 
-              className={`rounded-2xl p-3 min-w-[240px] flex flex-col h-[750px] ${stage.bg} border border-slate-850 shadow-xl`}
+              className={`rounded-2xl p-4 min-w-[280px] lg:w-[320px] shrink-0 flex flex-col h-[750px] ${stage.bg} border border-slate-850 shadow-xl`}
             >
               {/* Stage Header */}
               <div className="flex items-center justify-between mb-3 px-1">
