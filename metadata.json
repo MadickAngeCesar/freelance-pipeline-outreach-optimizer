@@ -1,0 +1,6 @@
+{
+  "name": "Freelance Pipeline & Outreach Optimizer",
+  "description": "An end-to-end client acquisition CRM and outreach sequence builder for freelancers. Build pipelines, track conversion rates, generate highly personalized AI outreach pitches, and optimize your business growth.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
