@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
 import dotenv from "dotenv";
 
@@ -260,14 +259,20 @@ app.post("/api/recommend-niches", async (req, res) => {
 
 async function startServer() {
   // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" && !process.env.ELECTRON_DIST_PATH) {
+    // Dynamic import to avoid bundling vite in production
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    // When bundled with Electron, process.cwd() might not be the project root
+    // Determine dist path relative to this file's location in production
+    const distPath = process.env.ELECTRON_DIST_PATH || path.join(process.cwd(), 'dist');
+    console.log(`Server using static files from: ${distPath}`);
+
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));

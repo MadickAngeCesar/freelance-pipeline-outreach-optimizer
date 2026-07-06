@@ -12,9 +12,17 @@ function startServer() {
   if (!isDev) {
     try {
       console.log('Production mode detected. Starting Express backend server...');
+
+      // Ensure NODE_ENV is set to production
+      process.env.NODE_ENV = 'production';
+
+      // Tell the server where the static files are
+      const distPath = path.join(__dirname, '..', 'dist');
+      process.env.ELECTRON_DIST_PATH = distPath;
+
       // In production, require the bundled dist/server.cjs server
       // We run the server code inside the main process or spawn it. Requiring it is easiest and highly reliable.
-      const serverPath = path.join(__dirname, '..', 'dist', 'server.cjs');
+      const serverPath = path.join(distPath, 'server.cjs');
       console.log(`Loading server from: ${serverPath}`);
       require(serverPath);
     } catch (err) {
