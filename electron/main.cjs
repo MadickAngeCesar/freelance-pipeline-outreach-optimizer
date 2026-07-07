@@ -32,12 +32,23 @@ function startServer() {
 }
 
 function checkServerReady(port, callback) {
-  const req = http.request({ port, host: '127.0.0.1', path: '/api/health', method: 'GET' }, (res) => {
+  const req = http.request({
+    port,
+    host: '127.0.0.1',
+    path: '/api/health',
+    method: 'GET',
+    timeout: 1000
+  }, (res) => {
     if (res.statusCode === 200) {
       callback(true);
     } else {
       callback(false);
     }
+  });
+
+  req.on('timeout', () => {
+    req.destroy();
+    callback(false);
   });
 
   req.on('error', () => {
