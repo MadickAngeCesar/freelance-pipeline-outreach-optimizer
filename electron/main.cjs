@@ -77,8 +77,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
-    minWidth: 1024,
-    minHeight: 700,
+    minWidth: 320,
+    minHeight: 480,
     title: "Client Acquisition & Pitch Optimizer",
     backgroundColor: '#0f172a', // Slate-900 background matching the dark premium theme
     webPreferences: {
